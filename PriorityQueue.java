@@ -150,9 +150,20 @@ class PriorityQueue<E, P> {
      */
 
     public Node add(E e, P priority) {
+        /*
+          - add node
+          - use pullup() to make sure in correct spot
+          - return node
+         */
 
-        // YOUR CODE GOES HERE
-        return null;
+        //a new node is created with given parameters
+        Node newNode = new Node(e, priority, tree.size());
+        //the new node is added to the end of the tree
+        tree.add(newNode);
+        //use pullUp() to make sure the smallest priority is at the top
+        //so seeing if the new node should be higher up which keeps heap property.
+        pullUp(newNode.idx);
+        return newNode;
     }
 
 
@@ -168,7 +179,22 @@ class PriorityQueue<E, P> {
 
     public boolean contains(E e) {
 
-        // ADD YOUR CODE HERE
+        /*
+         - traverse tree array
+         - see if nodes match
+         - based on findings return true or false
+         */
+        //looking at each node in the tree
+        for (Node node : tree){
+            //compare the value of the node and see if it matches
+            //isValid() is used here because it gets rid of any nodes,
+            // that shouldn't be counted in this traversal.
+            if (node.value().equals(e) && node.isValid()){
+                //if a match is found then true will be returned
+                return true;
+            }
+        }
+        //if no matches are found then false will be returned
         return false;
     }
 
