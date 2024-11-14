@@ -150,7 +150,11 @@ class PriorityQueue<E, P> {
      */
 
     public Node add(E e, P priority) {
+
         /*
+        Did use oracle for priority queue methods refresher!
+      link of reference: https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html
+
           - add node
           - use pullup() to make sure in correct spot
           - return node
@@ -180,6 +184,9 @@ class PriorityQueue<E, P> {
     public boolean contains(E e) {
 
         /*
+        Did use oracle for priority queue methods refresher!
+      link of reference: https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html
+
          - traverse tree array
          - see if nodes match
          - based on findings return true or false

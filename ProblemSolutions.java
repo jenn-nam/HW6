@@ -65,10 +65,38 @@ public class ProblemSolutions {
 
   public static int lastBoulder(int[] boulders) {
 
-      //
-      // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME / SECTION # ABOVE
-      //
-      return -1;
+      /*
+      Did use oracle for priority queue methods refresher!
+      link of reference: https://docs.oracle.com/javase/8/docs/api/java/util/PriorityQueue.html
+      - Priority Queue in reverse order (could use Collections for this?)
+      - as states above, smash two heaviest boulders
+        - get top two elements
+        -check for same weight then destroy (y==x)
+        - if not, do y-x as stated above
+      - then return weight of last boulder (0 if none left)
+       */
+      //the queue in reverse order as instructed
+      PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+     //put boulders in queue
+      for (int boulder : boulders) {
+          maxHeap.offer(boulder);
+      }
+      //loop for smashing until none or 1 is left
+      //get two largest ones
+      while (maxHeap.size()> 1) {
+          int x = maxHeap.poll();
+          int y = maxHeap.poll();
+          if (x != y) {
+              //substract y from x if not ==
+              maxHeap.offer(x-y);
+          }
+      }
+      //returning depedning if there's any left
+      if (maxHeap.isEmpty()){
+          return 0;
+      }else{
+          return maxHeap.peek();
+      }
   }
 
 
