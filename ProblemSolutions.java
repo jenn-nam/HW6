@@ -180,7 +180,7 @@ public class ProblemSolutions {
                 //if yes,here the pairs will be formatted so that the smaller number is first,
                 int a = Math.min(number, pair);
                 int b = Math.max(number, pair);
-                String pairOrder = ("(" + a + "," + b + ")");
+                String pairOrder = ("(" + a + ", " + b + ")");
 
                 //if pair has not been added
                 if (!holdingSet.contains(pairOrder)) {
@@ -191,8 +191,11 @@ public class ProblemSolutions {
             // then add pair to finalList
             checked.add(number);
         }
+        System.out.println("before" + finalList);
         //Using Collections for ascending order
         Collections.sort(finalList);
+
+        System.out.println("after" + finalList);
 
         return finalList;  // Make sure returned lists is sorted as indicated above
     }
