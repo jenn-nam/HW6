@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *  Jennifer Nambo / 002
  *
  *   This java file contains the problem solutions for the methods lastBoulder,
  *   showDuplicates, and pair methods. You should utilize the Java Collection
@@ -91,10 +91,39 @@ public class ProblemSolutions {
 
     public static ArrayList<String> showDuplicates(ArrayList<String> input) {
 
-        //
-        //  YOUR CODE GOES HERE
-        //
-        return new ArrayList<>();  // Make sure result is sorted in ascending order
+        /*
+        - count the number of times each string is in the list.
+        - put the unique strings into an array list
+        - return list in ascending order
+         */
+
+        //create list for unique strings
+        ArrayList<String> uniqueList = new ArrayList<>();
+        //loop will go through each string in given list
+        for (int i = 0; i < input.size(); i++) {
+            //current string in loop is held using var str
+            String str = input.get(i);
+            //counter for occurences of currentString
+            int counter = 0;
+            //this loop will also go through each str again to now begin counting its occurences
+            for (String currentString : input) {
+                //see if currentString matches string in previous loop
+                if (currentString.equals(str)) {
+                    //if there is a match than the counter increases
+                    counter++;
+                }
+            }
+            //checks that the string is appears in the list more than once
+            //the other condition set here checks that the string has not been added,
+            //to prevent it from being added more than once
+            if (counter > 1 && !uniqueList.contains(str)) {
+                //if the conditions are met then the string is added to uniqueList
+                uniqueList.add(str);
+            }
+        }
+        //list is sorted in ascending order and Comparator is used as well
+        uniqueList.sort(Comparator.naturalOrder());
+        return uniqueList;  // Make sure result is sorted in ascending order
 
     }
 
@@ -131,9 +160,40 @@ public class ProblemSolutions {
 
     public static ArrayList<String> pair(int[] input, int k) {
 
-        //
-        //  YOUR CODE GOES HERE
-        //
-        return new ArrayList<>();  // Make sure returned lists is sorted as indicated above
+        /*
+        - pairs are smallest to largest
+        - sort pairs in ascending order
+         */
+        //hash set will be used to remember which numbers have been seen
+        HashSet<Integer> checked = new HashSet<>();
+        //pairs will be kept here
+        ArrayList<String> finalList = new ArrayList<>();
+        //hash set to store pairs already put in final list (no repeats)
+        HashSet<String> holdingSet = new HashSet<>();
+
+        //loop to iterate over the numbers given for finding pairs
+        for (int number : input) {
+            //find complement (pair)
+            int pair = k - number;
+            //here we will check if the pair is in the set
+            if (checked.contains(pair)) {
+                //if yes,here the pairs will be formatted so that the smaller number is first,
+                int a = Math.min(number, pair);
+                int b = Math.max(number, pair);
+                String pairOrder = ("(" + a + "," + b + ")");
+
+                //if pair has not been added
+                if (!holdingSet.contains(pairOrder)) {
+                    finalList.add(pairOrder);
+                    holdingSet.add(pairOrder);
+                }
+            }
+            // then add pair to finalList
+            checked.add(number);
+        }
+        //Using Collections for ascending order
+        Collections.sort(finalList);
+
+        return finalList;  // Make sure returned lists is sorted as indicated above
     }
 }
